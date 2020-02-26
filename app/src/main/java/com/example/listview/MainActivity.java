@@ -3,6 +3,9 @@ package com.example.listview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
@@ -14,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ListView myListView = findViewById(R.id.myListView);
-        ArrayList<String> Country = new ArrayList<>();
+        final ArrayList<String> Country = new ArrayList<>();
         Country.add("India");
         Country.add("Japan");
         Country.add("Australia");
@@ -29,7 +32,16 @@ public class MainActivity extends AppCompatActivity {
         ListViews own adapters that completely control the ListView’s display.
         So adapters control the content displayed in the list as well as how to display it.
         */
-        ArrayAdapter<String> Adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,Country);
+        ArrayAdapter<String> Adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Country);
         myListView.setAdapter(Adapter);
+
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Log.i("Selected Country",Country.get(i));
+            }
+        });
+
     }
 }
